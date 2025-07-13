@@ -1,0 +1,19 @@
+name: FootstepParticles
+version: '${project.version}'
+main: net.dxzzz.footstepparticles.FootstepParticles
+depend: [PlaceholderAPI, LuckPerms, ProtocolLib]
+
+commands:
+  footprint:
+    permission-message: "§b§l脚印特效>>§c你没有使用此命令的权限！"
+    usage: "§b脚印特效系统 >>\n
+            §a/footprint enable <player> <particle> §7- §e为玩家启用某个脚印特效\n
+            §a/footprint preview <player> <particle> §7- §e为玩家提供某个特效预览\n
+            §a/footprint clear <player> §7- §e为玩家清除脚印特效\n
+            §a/footprint list §7- §e查看可用的脚印特效"
+
+
+permissions:
+  FootstepParticles.Operator:
+    default: op
+

@@ -1,0 +1,21 @@
+# 脚印粒子设置
+footprint:
+  interval-ticks: 3     # 每隔多少tick生成粒子
+  count: 1              # 每次生成几个粒子
+  offset-x: 0.2
+  offset-y: 0.1
+  offset-z: 0.2
+  # 预览时间持续时长(ticks)
+  preview_duration: 60
+  # 预览期间粒子生成的时间间隔(ticks)
+  preview_interval: 5
+
+#数据库设置(仅支持MySQL)- 必填
+DataBase:
+  MySQL:
+    Host: localhost
+    Username: root
+    Password:
+    Port: 3306
+    # 数据库名称
+    Name: footprint
