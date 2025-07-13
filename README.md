@@ -1,0 +1,2 @@
+# FootstepParticles
+适用于Spigot1.12核心服务器集群的玩家脚印特效插件
