@@ -1,6 +1,7 @@
 package net.dxzzz.footstepparticles;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -34,7 +35,7 @@ public class FootprintPlaceholderExpansion extends PlaceholderExpansion {
 
     @Override
     public String getVersion() {
-        return "1.0";
+        return "1.1";
     }
 
     @Override
@@ -92,6 +93,34 @@ public class FootprintPlaceholderExpansion extends PlaceholderExpansion {
                         return "0";
                     }
                     return "0";
+                }
+            }
+        }
+        else if (identifier.startsWith("state")) {
+            String[] parts = identifier.split("_");
+            if (parts.length < 2) {
+                return "错误的ID";
+            } else {
+                String tag = parts[1];
+                PermissionManager permissionManager = new PermissionManager(player, plugin);
+                List<String> havingPermission = permissionManager.getUsingPermissions("footprint.have");
+                List<String> usingPermissions = permissionManager.getUsingPermissions("footprint.using");
+                if(tag.equalsIgnoreCase("empty")) {
+                    if(usingPermissions.isEmpty()) {
+                        return "§a§l✔已选择";
+                    }
+                    else {
+                        return "§a§l✔点击选择";
+                    }
+                }
+                else {
+                    if (usingPermissions.contains("footprint.using." + tag)) {
+                        return "§a§l✔已选择";
+                    }
+                    if (havingPermission.contains("footprint.have." + tag)) {
+                        return "§a§l✔点击选择";
+                    }
+                    return "错误的ID";
                 }
             }
         }

@@ -5,6 +5,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.List;
 
 
 public class CommandExc implements CommandExecutor {
@@ -46,9 +49,11 @@ public class CommandExc implements CommandExecutor {
                 sender.sendMessage("§b脚印特效 >> §c无效的粒子特效名称");
                 return true;
             }
-            // 如果脚印合法，将其写入数据库
+            // 如果脚印合法，将其写入缓存
             sender.sendMessage("§b脚印特效 >> §a已为玩家§e" + targetName + "§a启用脚印粒子§e" + particleName);
             plugin.footstepListener.getParticleCache().put(target.getUniqueId(), particleName);
+            // 更新LuckPerms权限节点
+            changeUsingFootprint(target,particleName,plugin);
             return true;
         }
         // 为某个玩家清除脚印特效
@@ -98,6 +103,30 @@ public class CommandExc implements CommandExecutor {
         }
         else{
             return false;
+        }
+    }
+
+
+    // 调用该函数之前需检查脚印名称合法性
+    // 更新Lp权限节点
+    public static void changeUsingFootprint(Player player, String particleName, JavaPlugin plugin) {
+        if(particleName.contains(particleName)){
+            PermissionManager permissionManager = new PermissionManager(player,plugin);
+            List<String> usingPermissions =permissionManager.getUsingPermissions("footprint.using");
+            if(usingPermissions.size()>0){
+                if(usingPermissions.get(0).equalsIgnoreCase("footprint.using."+particleName)){
+                    return;
+                }
+                else {
+                    for(String usingPermission : usingPermissions){
+                        permissionManager.removePermission(player, usingPermission);
+                    }
+                    permissionManager.addPermission(player, "footprint.using."+particleName);
+                }
+            }
+            else {
+                permissionManager.addPermission(player, "footprint.using."+particleName);
+            }
         }
     }
 }
