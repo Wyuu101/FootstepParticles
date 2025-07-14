@@ -61,7 +61,7 @@ DataBase:
     ```
     例：
     /lp user <player> permission set footprint.have.<粒子名称>  -  使玩家拥有该粒子特效使用权限
-    /lp user <player> permission set footprint.using.<粒子名称> - 标记玩家当前正在使用的粒子特效（用于标记，如不赋予，将会使占位符变量出现异常）
+    /lp user <player> permission set footprint.using.<粒子名称> - 标记玩家当前正在使用的粒子特效 (本项不用显示在菜单赋予，已写进插件代码中）
     ```
 
 ## 2、占位符
