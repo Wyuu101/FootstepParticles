@@ -4,7 +4,7 @@
   <groupId>net.dxzzz</groupId>
   <artifactId>FootstepParticles</artifactId>
   <name>FootstepParticles</name>
-  <version>1.1</version>
+  <version>1.2</version>
   <build>
     <resources>
       <resource>

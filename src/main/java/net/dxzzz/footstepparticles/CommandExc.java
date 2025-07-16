@@ -72,6 +72,8 @@ public class CommandExc implements CommandExecutor {
             // 更新数据库
             sender.sendMessage("§b脚印特效 >> §a已清除玩家§e"+targetName+"§a的脚印特效");
             plugin.footstepListener.getParticleCache().put(target.getUniqueId(), "null");
+            // 清除Lp权限
+            clearUsingFootprint(target,plugin);
             return true;
         }
         else if (args[0].equals( "list")){
@@ -129,4 +131,14 @@ public class CommandExc implements CommandExecutor {
             }
         }
     }
+
+    // 清除所有正在使用的脚印Lp权限节点
+    public static void clearUsingFootprint(Player player, JavaPlugin plugin){
+        PermissionManager permissionManager = new PermissionManager(player,plugin);
+        List<String> usingPermissions = permissionManager.getUsingPermissions("footprint.using");
+        for(String usingPermission : usingPermissions) {
+            permissionManager.removePermission(player, usingPermission);
+        }
+    }
+
 }
